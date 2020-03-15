@@ -1,3 +1,20 @@
+/*
+ * Copyright (C) 2020 David Boucher
+ * This file is part of tron-ng <https://github.com/bouda1/tron-ng>.
+ *
+ * tron-ng is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * tron-ng is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with tron-ng.  If not, see <http://www.gnu.org/licenses/>.
+ */
 // Include standard headers
 #include <iostream>
 
@@ -186,7 +203,7 @@ int main(void) {
                  GL_TRUE); // To make MacOS happy; should not be needed
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   // FIXME DBR: To enable debugging.
-  //glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
+  // glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 
   GLint flags;
   glGetIntegerv(GL_CONTEXT_FLAGS, &flags);
@@ -217,7 +234,8 @@ int main(void) {
     glEnable(GL_DEBUG_OUTPUT);
     glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
     glDebugMessageCallback(glDebugOutput, nullptr);
-    glDebugMessageControl(GL_DEBUG_SOURCE_API, GL_DEBUG_TYPE_ERROR, GL_DEBUG_SEVERITY_HIGH, 0, nullptr, GL_TRUE);
+    glDebugMessageControl(GL_DEBUG_SOURCE_API, GL_DEBUG_TYPE_ERROR,
+                          GL_DEBUG_SEVERITY_HIGH, 0, nullptr, GL_TRUE);
   }
 
   // Ensure we can capture the escape key being pressed below

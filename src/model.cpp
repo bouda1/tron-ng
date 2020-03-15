@@ -1,3 +1,20 @@
+/*
+ * Copyright (C) 2020 David Boucher
+ * This file is part of tron-ng <https://github.com/bouda1/tron-ng>.
+ *
+ * tron-ng is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * tron-ng is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with tron-ng.  If not, see <http://www.gnu.org/licenses/>.
+ */
 #include "model.hpp"
 #include <cstdlib>
 #include <cstring>
@@ -64,7 +81,8 @@ Model::Model(const std::string &file) noexcept
 
   glGenBuffers(1, &_normal_buffer);
   glBindBuffer(GL_ARRAY_BUFFER, _normal_buffer);
-  glBufferData(GL_ARRAY_BUFFER, getNormalsSize(), &getNormals()[0], GL_STATIC_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, getNormalsSize(), &getNormals()[0],
+               GL_STATIC_DRAW);
 
   glGenBuffers(1, &_index_buffer);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _index_buffer);
@@ -115,48 +133,48 @@ const std::vector<GLushort> &Model::getIndices() const { return _indices; }
 
 void Model::draw() const {
   // 1rst attribute buffer : vertices
-  glEnableVertexAttribArray(0);   // Vertices
+  glEnableVertexAttribArray(0); // Vertices
   glBindBuffer(GL_ARRAY_BUFFER, _vertex_buffer);
   glVertexAttribPointer(0, // attribute 0. No particular reason for 0, but
                            // must match the layout in the shader.
                         3, // size
                         GL_FLOAT, // type
-                        false, // normalized?
+                        false,    // normalized?
                         0,        // stride
-                        (void*)0 // array buffer offset
+                        (void *)0 // array buffer offset
   );
 
   // 2nd attribute buffer : colors
   glEnableVertexAttribArray(1);
   glBindBuffer(GL_ARRAY_BUFFER, _color_buffer);
-  glVertexAttribPointer(1, // attribute
-                           // must match the layout in the shader.
-                        3, // size
+  glVertexAttribPointer(1,        // attribute
+                                  // must match the layout in the shader.
+                        3,        // size
                         GL_FLOAT, // type
-                        false, // normalized?
+                        false,    // normalized?
                         0,        // stride
-                        (void*)0 // array buffer offset
+                        (void *)0 // array buffer offset
   );
 
   // 2nd attribute buffer : normals
   glEnableVertexAttribArray(2);
   glBindBuffer(GL_ARRAY_BUFFER, _normal_buffer);
-  glVertexAttribPointer(2, // attribute
-                           // must match the layout in the shader.
-                        3, // size
+  glVertexAttribPointer(2,        // attribute
+                                  // must match the layout in the shader.
+                        3,        // size
                         GL_FLOAT, // type
-                        false, // normalized?
+                        false,    // normalized?
                         0,        // stride
-                        (void*)0 // array buffer offset
+                        (void *)0 // array buffer offset
   );
 
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _index_buffer);
   glDrawElements(GL_TRIANGLES,        // mode
                  getIndices().size(), // count
                  GL_UNSIGNED_SHORT,   // type
-                 (void*)0);
+                 (void *)0);
 
-  //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+  // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
   glDisableVertexAttribArray(0);
   glDisableVertexAttribArray(1);
