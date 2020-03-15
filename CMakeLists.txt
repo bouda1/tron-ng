@@ -5,6 +5,8 @@ project (tron-ng VERSION 0.1)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+OPTION(WITH_TESTING "Enable unit tests" ON)
+
 set(OpenGL_GL_PREFERENCE GLVND)
 find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
@@ -41,3 +43,7 @@ add_executable(tron-ng
 
 target_link_libraries(tron-ng ${OPENGL_LIBRARY} glfw GLEW pthread)
 
+if (WITH_TESTING)
+  enable_testing()
+  add_subdirectory(tests)
+endif ()

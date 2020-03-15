@@ -1,20 +1,8 @@
 #include "tree.hpp"
 
-Tree::Tree(const std::vector<size_t> &indices,
-           const std::vector<glm::vec3> &vertices) {
-  glm::vec3 v;
-  size_t count = 0;
-  size_t pos = 0;
-  for (size_t i : indices) {
-    v += vertices[i];
-    count++;
-    if (count == 3) {
-      // Division by 3 for the average...
-      v /= 3.0f;
-      //insert({v.x, {v.y, {v.z, pos}}});
-      count = 0;
-      v = {0.0f, 0.0f, 0.0f};
-      pos++;
-    }
-  }
+void ZoneTree::insert(float x, float y, float z, short idx) {
+  auto& zp = _zp.emplace_back(x, y, z, idx);
+  _x.emplace(x, &zp);
+  _y.emplace(y, &zp);
+  _z.emplace(z, &zp);
 }
