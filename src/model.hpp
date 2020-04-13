@@ -23,6 +23,7 @@
 #include <vector>
 
 class Model {
+protected:
   std::vector<glm::vec3> _vertices;
   std::vector<glm::vec3> _colors;
   std::vector<GLushort> _indices;

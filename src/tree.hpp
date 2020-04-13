@@ -22,10 +22,12 @@
 
 class ZonePoint {
 public:
-  ZonePoint(float x, float y, float z, short index)
-      : x(x), y(y), z(z), index(index) {}
+
   float x, y, z;
   short index;
+
+  ZonePoint(float x, float y, float z, short index)
+      : x(x), y(y), z(z), index(index) {}
 };
 
 class ZoneTree {

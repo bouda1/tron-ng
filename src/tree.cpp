@@ -23,3 +23,4 @@ void ZoneTree::insert(float x, float y, float z, short idx) {
   _y.emplace(y, &zp);
   _z.emplace(z, &zp);
 }
+

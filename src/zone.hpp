@@ -18,8 +18,20 @@
 #ifndef _ZONE_HPP_
 #define _ZONE_HPP_
 #include "model.hpp"
+#include <boost/geometry.hpp>
+#include <boost/geometry/geometries/box.hpp>
+#include <boost/geometry/geometries/point.hpp>
+#include <boost/geometry/index/rtree.hpp>
+
+namespace bgi = boost::geometry::index;
+namespace bg = boost::geometry;
+
+typedef bg::model::point<float, 3, bg::cs::cartesian> point;
+typedef bg::model::box<point> box;
 
 class Zone : public Model {
+  bgi::rtree<std::pair<box, uint32_t>, bgi::rstar<16>> _tree;
+
 public:
   Zone(const std::string &name);
   const Model &get_model() const;

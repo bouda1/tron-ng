@@ -17,4 +17,38 @@
  */
 #include "zone.hpp"
 
-Zone::Zone(const std::string &name) : Model(name) {}
+Zone::Zone(const std::string &name) : Model(name) {
+
+  /* Construction of the rtree */
+  float x1, x2, y1, y2, z1, z2;
+  int count = 0;
+  int triangle_id = 0;
+  for (auto &i : _indices) {
+    auto &v = _vertices[i];
+    if (count == 0) {
+      x1 = x2 = v[0];
+      y1 = y2 = v[1];
+      z1 = z2 = v[2];
+      count++;
+    } else {
+      if (v[0] < x1)
+        x1 = v[0];
+      if (v[0] > x2)
+        x2 = v[0];
+      if (v[1] < y1)
+        y1 = v[1];
+      if (v[1] > y2)
+        y2 = v[1];
+      if (v[2] < z1)
+        z1 = v[2];
+      if (v[2] > z2)
+        z2 = v[2];
+      if (count == 2) {
+        box b(point(x1, y1, z1), point(x2, y2, z2));
+        _tree.insert(std::make_pair(b, triangle_id++));
+        count = 0;
+      } else
+        count++;
+    }
+  }
+}
