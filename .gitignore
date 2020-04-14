@@ -3,3 +3,7 @@ build/*
 objects/*.png
 objects/*.jpg
 objects/*.blend1
+doc/html/*
+doc/latex/*
+.idea
+.vscode

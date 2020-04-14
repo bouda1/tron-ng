@@ -23,6 +23,11 @@
 #include <random>
 #include <sstream>
 
+/**
+ * @brief Construct a new Model:: Model object
+ *
+ * @param file The name of an obj file to build the model.
+ */
 Model::Model(const std::string &file) noexcept
     : _vertices{}, _colors{}, _indices{}, _normals{}, _uv{} {
   std::random_device rd;
@@ -90,12 +95,21 @@ Model::Model(const std::string &file) noexcept
                &getIndices()[0], GL_STATIC_DRAW);
 }
 
+/**
+ * @brief Destroy the Model:: Model object
+ *
+ */
 Model::~Model() {
   glDeleteBuffers(1, &_vertex_buffer);
   glDeleteBuffers(1, &_color_buffer);
   glDeleteBuffers(1, &_index_buffer);
 }
 
+/**
+ * @brief Returns the buffer containing data as a \a GLfloat* pointer.
+ *
+ * @return const GLfloat*
+ */
 const GLfloat *Model::getData() const {
   static_assert(sizeof(glm::vec3) == sizeof(GLfloat) * 3,
                 "glm::vec3 is not a structure containing only 3 GLfloat...");
@@ -103,10 +117,20 @@ const GLfloat *Model::getData() const {
   return reinterpret_cast<const GLfloat *>(v);
 }
 
+/**
+ * @brief Returns the data size in bytes.
+ *
+ * @return size_t
+ */
 size_t Model::getDataSize() const {
   return _vertices.size() * 3 * sizeof(float);
 }
 
+/**
+ * @brief Returns the normals buffer as a \a GLfloat* pointer.
+ *
+ * @return const GLfloat*
+ */
 const GLfloat *Model::getNormals() const {
   static_assert(sizeof(glm::vec3) == sizeof(GLfloat) * 3,
                 "glm::vec3 is not a structure containing only 3 GLfloat...");
@@ -114,6 +138,11 @@ const GLfloat *Model::getNormals() const {
   return reinterpret_cast<const GLfloat *>(v);
 }
 
+/**
+ * @brief Returns the normals buffer size in bytes.
+ *
+ * @return size_t
+ */
 size_t Model::getNormalsSize() const {
   return _normals.size() * 3 * sizeof(float);
 }

@@ -16,7 +16,13 @@
  * along with tron-ng.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "zone.hpp"
+#include <boost/function_output_iterator.hpp>
 
+/**
+ * @brief Construct a new Zone:: Zone object
+ * 
+ * @param name The filename that contains data for this object.
+ */
 Zone::Zone(const std::string &name) : Model(name) {
 
   /* Construction of the rtree */
@@ -51,4 +57,24 @@ Zone::Zone(const std::string &name) : Model(name) {
         count++;
     }
   }
+}
+
+/**
+ * @brief Returns a vector of the triangles indices candidates to
+ * an intersection with the \a pos vector in a zone of radius \a dist.
+ * 
+ * @param pos A point with 3 coordinates in the global space.
+ * @param dist A float representing a distance.
+ * @return std::vector<GLushort>
+ */
+std::vector<GLushort> Zone::getNearestIndices(glm::vec3 const &pos,
+                                              float dist) {
+  std::vector<GLushort> retval;
+  box query_box(point(pos[0] - dist, pos[1] - dist, pos[2] - dist),
+                point(pos[0] + dist, pos[1] + dist, pos[2] + dist));
+  _tree.query(bgi::intersects(query_box),
+              boost::make_function_output_iterator([&retval](auto const &val) {
+                retval.push_back(val.second);
+              }));
+  return retval;
 }

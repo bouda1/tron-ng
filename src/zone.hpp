@@ -18,6 +18,7 @@
 #ifndef _ZONE_HPP_
 #define _ZONE_HPP_
 #include "model.hpp"
+#include <GL/glew.h>
 #include <boost/geometry.hpp>
 #include <boost/geometry/geometries/box.hpp>
 #include <boost/geometry/geometries/point.hpp>
@@ -29,12 +30,17 @@ namespace bg = boost::geometry;
 typedef bg::model::point<float, 3, bg::cs::cartesian> point;
 typedef bg::model::box<point> box;
 
+/**
+ * @brief This class represents the world where motorcycles evolve.
+ * 
+ */
 class Zone : public Model {
-  bgi::rtree<std::pair<box, uint32_t>, bgi::rstar<16>> _tree;
+  bgi::rtree<std::pair<box, GLushort>, bgi::rstar<16>> _tree;
 
 public:
   Zone(const std::string &name);
   const Model &get_model() const;
+  std::vector<GLushort> getNearestIndices(glm::vec3 const &pos, float dist);
 };
 
 #endif

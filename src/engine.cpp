@@ -32,7 +32,7 @@ Engine::Engine(uint32_t step) : _step(step), _stop(false) {
                        .count()
                 << "\n";
       start += std::chrono::milliseconds(_step);
-      /* The computation should be done every step ms */
+      /* The computation should be done every _step_ ms */
       _compute();
       if (_stop)
         break;
@@ -54,7 +54,8 @@ void Engine::addMotorcycle(Motorcycle *motorcycle) {
   _motorcycles.emplace_back(motorcycle);
 }
 
-void Engine::_compute() {}
+void Engine::_compute() {
+}
 
 const std::vector<std::unique_ptr<Motorcycle>> &Engine::getMotorcycles() const {
   return _motorcycles;
