@@ -20,12 +20,10 @@
 #include "model.hpp"
 #include "physics.hpp"
 
-class Motorcycle : public Model {
-  Physics _physics;
+class Motorcycle : public Model, public Physics {
 
 public:
   Motorcycle();
-  const Physics &getPhysics() const;
 };
 
 #endif

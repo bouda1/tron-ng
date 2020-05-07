@@ -302,7 +302,7 @@ int main(void) {
 
     for (auto &m : engine.getMotorcycles()) {
       // Our ModelViewProjection : multiplication of our 3 matrices
-      MVP = Projection * View * m->getPhysics().getModel();
+      MVP = Projection * View * m->getModel();
 
       // Send our transformation to the currently bound shader,
       // in the "MVP" uniform

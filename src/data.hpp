@@ -18,9 +18,10 @@
 #ifndef _DATA_HPP_
 #define _DATA_HPP_
 #include <glm/ext/quaternion_float.hpp>
+#include <array>
 
 class Data {
-  float _v[7];
+  std::array<float, 7> _v;
 
 public:
   Data();
@@ -28,6 +29,9 @@ public:
   Data(const glm::vec3 &P, const glm::quat &q);
   Data operator*(float t);
   Data operator+(const Data &d);
+  Data& operator+=(const Data &d);
+  bool operator==(const Data &other) const;
+  float* ptr(uint32_t index);
 };
 
 #endif

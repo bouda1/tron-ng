@@ -26,9 +26,9 @@
 Zone::Zone(const std::string &name) : Model(name) {
 
   /* Construction of the rtree */
-  float x1, x2, y1, y2, z1, z2;
-  int count = 0;
-  int triangle_id = 0;
+  GLfloat x1, x2, y1, y2, z1, z2;
+  GLint count = 0;
+  GLint triangle_id = 0;
   for (auto &i : _indices) {
     auto &v = _vertices[i];
     if (count == 0) {

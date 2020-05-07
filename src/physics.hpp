@@ -26,7 +26,7 @@ class Physics {
   glm::vec3 _pos;
 
   // Mass of the motorcycle
-  const float _M;
+  const glm::float32 _M;
   // Linear moment of the motorcycle P = M * Vg wheree  M is the motorcycle
   // mass and Vg is the center of mass coordinates in the universe coordinates.
   glm::vec3 _P;
@@ -63,6 +63,7 @@ public:
   Physics() noexcept;
   void applyForce(const glm::vec3 &force) noexcept;
   void computeNextStep(float deltat) noexcept;
-  glm::mat4 const &getModel() const;
+  glm::mat4 const &getModel();
+  constexpr glm::float32 mass() { return _M; }
 };
 #endif

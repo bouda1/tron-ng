@@ -55,6 +55,9 @@ void Engine::addMotorcycle(Motorcycle *motorcycle) {
 }
 
 void Engine::_compute() {
+  for (auto& m : _motorcycles) {
+    m->computeNextStep(_step);
+  }
 }
 
 const std::vector<std::unique_ptr<Motorcycle>> &Engine::getMotorcycles() const {

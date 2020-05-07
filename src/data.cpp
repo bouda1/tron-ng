@@ -16,6 +16,7 @@
  * along with tron-ng.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "data.hpp"
+#include <cstring>
 
 Data::Data() : _v{0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f} {}
 
@@ -34,4 +35,23 @@ Data Data::operator+(const Data &d) {
   return Data{_v[0] + d._v[0], _v[1] + d._v[1], _v[2] + d._v[2],
               _v[3] + d._v[3], _v[4] + d._v[4], _v[5] + d._v[5],
               _v[6] + d._v[6]};
+}
+
+float* Data::ptr(uint32_t index) {
+    return &_v[index];
+}
+
+Data& Data::operator+=(const Data &d) {
+    auto v = _v.begin();
+    auto vv = d._v.begin();
+    while (v != _v.end()) {
+        *v += *vv;
+        ++v;
+        ++vv;
+    }
+    return *this;
+}
+
+bool Data::operator==(const Data& other) const {
+    return memcmp(_v.data(), other._v.data(), _v.size() * sizeof(float)) == 0;
 }

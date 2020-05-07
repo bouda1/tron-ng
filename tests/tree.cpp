@@ -17,8 +17,24 @@
  */
 #include "tree.hpp"
 #include "gtest/gtest.h"
+#include "data.hpp"
 
 TEST(TreeZone, test) {
   int i = 1;
   ASSERT_EQ(i, 1);
+}
+
+TEST(DataTest, MultFloat) {
+    Data d{1, 2, 3, 4, 5, 6, 7};
+    d = d * 2;
+    Data d1{2, 4, 6, 8, 10, 12, 14};
+    ASSERT_EQ(d, d1);
+}
+
+TEST(DataTest, PlusEqual) {
+    Data d{1, 2, 3, 4, 5, 6, 7};
+    Data d1{2, 3, 4, 5, 6, 7, 8};
+    d1 += d;
+    Data d2{3, 5, 7, 9, 11, 13, 15};
+    ASSERT_EQ(d1, d2);
 }

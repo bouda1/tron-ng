@@ -17,7 +17,8 @@ include_directories(${PROJECT_SOURCE_DIR}/src)
 
 target_sources(ut
     PRIVATE
-      tree.cpp
+    tree.cpp
+    ${CMAKE_SOURCE_DIR}/src/data.cpp
 )
 
 target_link_libraries(ut
